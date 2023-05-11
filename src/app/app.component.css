@@ -1,0 +1,15 @@
+p {
+    text-align: center
+}
+
+app-rate-and-value {
+    position: absolute;
+    left: 10%;
+    top: 7%;
+}
+
+app-result-view {
+    position: absolute;
+    right: 10%;
+    top: 7%;
+}
