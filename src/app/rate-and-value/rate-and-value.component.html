@@ -1,4 +1,19 @@
-<h1>Today rate of $ is {{rate}}</h1>
-Input amount of exchange: <input type="text">
-<button (click)="calculate()">Calculate</button>
+<div *ngIf="rate != 'init'; else initCurrency">
+<h1>Today rate of 
+    <select #selectedCurrency (change)="onSelectRate(selectedCurrency.value)">
+        <option *ngFor="let currency of rates; index as i" value={{i}}>{{currency.cc}}</option>
+    </select>
+    is {{rate.rate}}</h1>
+Input amount of exchange: <input (keyup)="calculate($event)" type="text">
+<button>confirm</button> <!-- todo with delegate result operation to the result-view comp -->
+</div>
+<div *ngIf="preExchange != 0">{{preExchange | preResultView}}</div>
+
+<ng-template #initCurrency>
+    <h1>Select currency  
+    <select #selectedCurrency (change)="onSelectRate(selectedCurrency.value)">
+        <option *ngFor="let currency of rates; index as i" value={{i}}>{{currency.cc}}</option>
+    </select>
+    </h1>
+</ng-template>
 

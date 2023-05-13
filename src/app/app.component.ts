@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lesson-two';
+  rates = [
+    { "rate" : "1.0", "cc" : "UAH"},
+    { "rate" : "38.25", "cc" : "USD"},
+    { "rate" : "40.43", "cc" : "EUR"},
+    { "rate" : "8.5", "cc" : "PLZ"},
+    { "rate" : "42.2", "cc" : "FNT"},
+]
 }
