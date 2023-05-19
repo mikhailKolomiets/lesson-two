@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NbuRatesService } from '../nbu-rates.service';
 
 @Component({
   selector: 'app-rate-and-value',
@@ -7,29 +8,45 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RateAndValueComponent implements OnInit {
 
-  @Input() rates: any;
+  rates: any;
   rate: any = "init"
   preExchange: number = 0;
+  preExchangeInput: any = ""
 
-  constructor() { }
+  constructor(private service: NbuRatesService) {
+    service.updatesRates();
+    this.rates = service.getRates();
+   }
 
   ngOnInit(): void {
   }
 
   calculate(toCount: any) {
-      this.preExchange = Number.parseInt(toCount.target.value);
-      if (this.preExchange > 0) {
-        this.preExchange *= this.rate.rate;
-        // to do calculate logic
-      } else {
-        this.preExchange = 0;
-      }
-      console.log(this.preExchange)
+      localStorage.setItem("userInput", toCount.target.value);
+      this.calculateLogic(toCount.target.value);
   }
 
   onSelectRate(rateId: any) {
     console.log(rateId)
     this.rate = this.rates[rateId];
+    if(localStorage.getItem("userInput") != null) {
+      let preExFromStorage: any = localStorage.getItem("userInput");
+      console.log("preEx from storage: " + preExFromStorage)
+      this.preExchangeInput = preExFromStorage;
+      this.calculateLogic(preExFromStorage);
+    }
+    //this.rates = this.service.getRates();
+  }
+
+  private calculateLogic(toCount: string) {
+    this.preExchange = Number.parseInt(toCount);
+    if (this.preExchange > 0) {
+      this.preExchange *= this.rate.rate;
+      // to do calculate logic
+    } else {
+      this.preExchange = 0;
+    }
+    console.log(this.preExchange)
   }
 
 }

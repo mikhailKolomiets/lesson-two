@@ -4,7 +4,7 @@
         <option *ngFor="let currency of rates; index as i" value={{i}}>{{currency.cc}}</option>
     </select>
     is {{rate.rate}}</h1>
-Input amount of exchange: <input (keyup)="calculate($event)" type="text">
+Input amount of exchange: <input (keyup)="calculate($event)" type="text" value="{{preExchangeInput}}">
 <button>confirm</button> <!-- todo with delegate result operation to the result-view comp -->
 </div>
 <div *ngIf="preExchange != 0">{{preExchange | preResultView}}</div>

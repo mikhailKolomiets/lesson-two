@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RateAndValueComponent } from './rate-and-value/rate-and-value.component';
 import { ResultViewComponent } from './result-view/result-view.component';
 import { PreResultViewPipe } from './pre-result-view.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PreResultViewPipe } from './pre-result-view.pipe';
     PreResultViewPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
