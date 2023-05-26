@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NbuRatesService } from '../nbu-rates.service';
 
@@ -7,7 +7,7 @@ import { NbuRatesService } from '../nbu-rates.service';
   templateUrl: './rate-and-value.component.html',
   styleUrls: ['./rate-and-value.component.css']
 })
-export class RateAndValueComponent implements OnInit {
+export class RateAndValueComponent implements DoCheck {
 
   rates: any;
   rate: any = "init"
@@ -15,13 +15,20 @@ export class RateAndValueComponent implements OnInit {
   preExchangeInput: any = ""
   valueInputForm = new FormControl('', [Validators.pattern('[0-9]*$'), Validators.required]);
   @Output() resultUpdater = new EventEmitter<Number>();
+  exchangeDo: boolean = false;
 
   constructor(private service: NbuRatesService) {
     service.updatesRates();
     this.rates = service.getRates();
    }
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
+    if(!this.exchangeDo) {
+      this.resultUpdater.emit(0);
+    } else {
+      this.exchangeDo = false;
+      console.log("ONLY in this moment we show exchange result")
+    }
   }
 
   calculate(toCount: any) {
@@ -48,8 +55,9 @@ export class RateAndValueComponent implements OnInit {
   }
 
   confirmExc() {
-    console.log("delegate")
     this.resultUpdater.emit(this.preExchange);
+    this.exchangeDo = true;
+    console.log("exchange = true")
   }
 
   private calculateLogic(toCount: string) {
