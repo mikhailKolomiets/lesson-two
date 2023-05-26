@@ -6,6 +6,7 @@ import { RateAndValueComponent } from './rate-and-value/rate-and-value.component
 import { ResultViewComponent } from './result-view/result-view.component';
 import { PreResultViewPipe } from './pre-result-view.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

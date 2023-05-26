@@ -1,3 +1,3 @@
 <p> EXCHANGE CALCULATOR </p>
-<app-rate-and-value></app-rate-and-value>
-<app-result-view></app-result-view>
+<app-rate-and-value (resultUpdater)="setResult($event)"></app-rate-and-value>
+<app-result-view [result]="result"></app-result-view>

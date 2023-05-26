@@ -14,4 +14,10 @@ export class AppComponent {
     { "rate" : "8.5", "cc" : "PLZ"},
     { "rate" : "42.2", "cc" : "FNT"},
 ]
+  result: Number = 0;
+
+  setResult(result: Number) {
+    this.result = result;
+    console.log(result)
+  }
 }
