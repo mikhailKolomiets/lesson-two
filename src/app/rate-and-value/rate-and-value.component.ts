@@ -1,6 +1,6 @@
 import { Component, DoCheck, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { NbuRatesService } from '../nbu-rates.service';
+import { NbuRatesService } from '../service/nbu-rates.service';
 
 @Component({
   selector: 'app-rate-and-value',
@@ -26,8 +26,8 @@ export class RateAndValueComponent implements DoCheck {
     if(!this.exchangeDo) {
       this.resultUpdater.emit(0);
     } else {
+      //ONLY in this moment we show exchange result
       this.exchangeDo = false;
-      console.log("ONLY in this moment we show exchange result")
     }
   }
 
@@ -46,25 +46,21 @@ export class RateAndValueComponent implements DoCheck {
     this.rate = this.rates[rateId];
     if(localStorage.getItem("userInput") != null) {
       let preExFromStorage: any = localStorage.getItem("userInput");
-      console.log("preEx from storage: " + preExFromStorage)
       this.preExchangeInput = preExFromStorage;
       this.valueInputForm.setValue(preExFromStorage);
       this.calculateLogic(preExFromStorage);
     }
-    //this.rates = this.service.getRates();
   }
 
   confirmExc() {
     this.resultUpdater.emit(this.preExchange);
     this.exchangeDo = true;
-    console.log("exchange = true")
   }
 
   private calculateLogic(toCount: string) {
     this.preExchange = Number.parseInt(toCount);
     if (this.preExchange > 0) {
       this.preExchange *= this.rate.rate;
-      // to do calculate logic
     } else {
       this.preExchange = 0;
     }

@@ -15,9 +15,8 @@ export class ResultViewComponent implements OnChanges {
   @Input() result: Number = 0
 
   ngOnChanges(): void {
-    //console.log("save result")
     if(this.result != 0) {
-      console.log("save result, update history, doing meditation... ")
+      //save result and update history 
       this.resultHistory.push(this.result)
       this.updateHistory()
     }
